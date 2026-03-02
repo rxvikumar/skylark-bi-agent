@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: bi-agent-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: MONDAY_API_KEY
+        sync: false
+      - key: MONDAY_DEALS_BOARD_ID
+        sync: false
+      - key: MONDAY_WORKORDERS_BOARD_ID
+        sync: false
+      - key: PORT
+        value: 3001
+
+  - type: static
+    name: bi-agent-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false
